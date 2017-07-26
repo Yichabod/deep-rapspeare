@@ -10,15 +10,15 @@ I was inspired by Andrej Karpathy's [post](http://karpathy.github.io/2015/05/21/
 
 ### Preparing the training data
 
-I downloaded the complete works of Shakespeare from [Project Gutenberg](http://www.gutenberg.org/ebooks/author/65), and scraped the lyrics online. I here feel obliged to give a brief disclaimer: I'm not entirely clear on the legality of scraping metrolyrics' content, and, while I do know cases in the past where people have gotten in trouble (the [unfortunate Mr Swartz](https://www.wikiwand.com/en/United_States_v._Swartz) comes to mind), I don't think any harmful intention/ profit motives can be seriously argued, not to mention the fact that these lyrics sites don't even own the content they display.
+I downloaded the complete works of Shakespeare from [Project Gutenberg](http://www.gutenberg.org/ebooks/author/65), and got some scraped lyrics online. I here feel obliged to give a brief disclaimer: I'm not entirely clear on the legality of scraping metrolyrics' content, and, while I do know cases in the past where people have gotten in trouble (the [unfortunate Mr Swartz](https://www.wikiwand.com/en/United_States_v._Swartz) comes to mind), I don't think any harmful intention/ profit motives can be seriously argued, not to mention the fact that these lyrics sites don't even own the content they display.
 
   I haven't provided the code for scraping (As my father would always say, "You're either paranoid or you're stupid"), but it shouldn't be too big a challenge to flick through the [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) documentation and/or look at some [existing implementations](https://github.com/mjbright/Scraper).
   I wrote a simple script (mixer.py) to alternate lines between the Shakespeare text and the Rap lyrics so that the RNN would be trained evenly on both texts, and because the sentence is the smallest unit of expression that preserves coherent syntax and ideas. If you had, say, alternated words between rap and Shakespeare, the result would be an uninteresting jumble of words with none of the distinct syntax that inflects either rap or Shakespeare.
   
 ### Modifying the existing Character RNN
-  The character RNN I used was a Karpathy-inspired LSTM project [I found on Github](https://github.com/keskarnitish/Lasagne/blob/master/examples/lstm_text_generation.py) using Lasagne and Theano. In trying to to implement this code, however, I had to change a few things. 
+  The character RNN I used was a Karpathy-inspired LSTM project [I found on Github](https://github.com/keskarnitish/Lasagne/blob/master/examples/lstm_text_generation.py) using Lasagne and Theano. In trying to to implement this code, however, some things had to be changed. 
   
-  First was the fact that this model didn't actually save any weights, so I added save_weights(), which lets you save the results of training to pass to your friends so they could have some great Rapspeare fun without an expensive GPU.
+  First was the fact that this model didn't actually save any weights, so save_weights() was added, which lets you save the results of training to pass to your friends so they could have some great Rapspeare fun without an expensive GPU.
   
   Second, I reduced the number of total Epochs to 30 from 50, because I was noticing no real improvement after 20 or so Epochs (Like those kids that peak in high school, I saw that Rapspeare pretty much reached its potential under the design architecture that I'd chosen, so I decided to pull the plug there). Not to mention the fact that it was hurting my wallet a little bit under the p2 GPU server I was paying for per GB-hour. 
   
@@ -89,5 +89,5 @@ As you can see with Karpathy's example, if you use a complete longer text, you c
   
   If you want to look through some more interesting output, I've uploaded a doc with some of the final training results (Lyrical_Rapspeare.txt).
   
- Also, very grateful to @sorenbouma who helped me a lot with the construction of Rapspeare.
+I need to thank @sorenbouma for his significant help and guidance for this; I wouldn't have been able to do it without his encouragement, hints and generous time. 
   
