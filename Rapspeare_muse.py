@@ -1,8 +1,6 @@
 
 # coding: utf-8
 
-# In[1]:
-
 '''
 Recurrent network example.  Trains a 2 layered LSTM network to learn
 text from a user-provided input file. The network can then be used to generate
@@ -25,7 +23,7 @@ character.
 
 About 20 or so epochs are necessary to generate text that "makes sense".
 
-Written by @keskarnitish
+Template by @keskarnitish and lightly modified by @Yichabod to allow weight saving and weight importing
 Pre-processing of text uses snippets of Karpathy's code (BSD License)
 '''
 
@@ -49,7 +47,7 @@ except Exception as e:
     print("A sample txt file can be downloaded from https://s3.amazonaws.com/text-datasets/nietzsche.txt")
     raise IOError('Unable to Read Text')
 
-generation_phrase = "Straight out the fucking dungeons of Rap," #This phrase will be used as seed to generate text.
+generation_phrase = "Straight out the fuckin dungeons of Rap," #This phrase will be used as seed to generate text.
 
 #This snippet loads the text file and creates dictionaries to 
 #encode characters into a vector-space representation and vice-versa. 
@@ -77,18 +75,17 @@ GRAD_CLIP = 100
 PRINT_FREQ = 1000
 
 # Number of epochs to train the net
-NUM_EPOCHS =30 #was 50
+NUM_EPOCHS = 30 #was 50
 
 # Batch Size
 BATCH_SIZE = 128
 
-def save_weights(model_output, path= 'layers.npz'):
+def save_weights(model_output, path= 'layers.npz'): #saves model weights to file layers.npz
     print("saving")
 
     import dill as pickle
     np.savez(path,*lasagne.layers.get_all_param_values(model_output))
-    #with open(path,"wb") as f:
-    #    pickle.dump(f,model_output)
+    
     print("saved")
     
 def load_weights(model, path= 'layers.npz'):
@@ -242,23 +239,23 @@ def main(num_epochs=NUM_EPOCHS):
         for it in xrange(data_size * num_epochs / BATCH_SIZE):
             t1 = time.clock()
             try_it_out() # Generate text using the p^th character as the start. 
-#             print(t1 - time.clock())
-#             avg_cost = 0;
-#             for _ in range(PRINT_FREQ):
-#                 x,y = gen_data(p)
+            print(t1 - time.clock())
+            avg_cost = 0;
+            for _ in range(PRINT_FREQ):
+                x,y = gen_data(p)
                 
-#                 #print(p)
-#                 p += SEQ_LENGTH + BATCH_SIZE - 1 
-#                 if(p+BATCH_SIZE+SEQ_LENGTH >= data_size):
-#                     print('Carriage Return')
-#                     p = 0;
+                #print(p)
+                p += SEQ_LENGTH + BATCH_SIZE - 1 
+                if(p+BATCH_SIZE+SEQ_LENGTH >= data_size):
+                    print('Carriage Return')
+                    p = 0;
                 
 
-#                 avg_cost += train(x, y)
-#             print("Epoch {} average loss = {}".format(it*1.0*PRINT_FREQ/data_size*BATCH_SIZE, avg_cost / PRINT_FREQ))
-#             if it % 2 == 0:
-#                 save_weights(l_out)
-#                 print("saved")
+                avg_cost += train(x, y)
+            print("Epoch {} average loss = {}".format(it*1.0*PRINT_FREQ/data_size*BATCH_SIZE, avg_cost / PRINT_FREQ))
+            if it % 2 == 0:
+                save_weights(l_out)
+                print("saved")
 
     except KeyboardInterrupt:
         pass
@@ -266,9 +263,6 @@ def main(num_epochs=NUM_EPOCHS):
 
 if __name__ == '__main__':
     main()
-
-
-# In[ ]:
 
 
 
