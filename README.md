@@ -88,7 +88,7 @@ As you can see with Karpathy's example, if you use a complete longer text, you c
   
   If anyone wanted to take a next step forward in creating the next rapper ghostwriter AI, it would be interesting to try and weight the ends of the sentence somehow such that it could follow a rhyme scheme, which in theory is definitely doable, but in practice might be difficult for someone without a lot of theano experience to muddle with the output process of the RNN.
   
-  If you want to look through some more interesting output, I've uploaded a doc with some of the final training results.
+  If you want to look through some more interesting output, I've uploaded a doc with some of the final training results (Lyrical_Rapspeare.txt).
   
   Hope you enjoyed.
   
