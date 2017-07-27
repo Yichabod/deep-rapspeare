@@ -16,13 +16,15 @@ I downloaded the complete works of Shakespeare from [Project Gutenberg](http://w
   I wrote a simple script (mixer.py) to alternate lines between the Shakespeare text and the Rap lyrics so that the RNN would be trained evenly on both texts, and because the sentence is the smallest unit of expression that preserves coherent syntax and ideas. If you had, say, alternated words between rap and Shakespeare, the result would be an uninteresting jumble of words with none of the distinct syntax that inflects either rap or Shakespeare.
   
 ### Modifying the existing Character RNN
-  The character RNN I used was a Karpathy-inspired LSTM project [I found on Github](https://github.com/keskarnitish/Lasagne/blob/master/examples/lstm_text_generation.py) using Lasagne and Theano. In trying to to implement this code, however, some things had to be changed. 
+  The character RNN I used was a Karpathy-inspired LSTM project [I found on Github](https://github.com/keskarnitish/Lasagne/blob/master/examples/lstm_text_generation.py) using Lasagne and Theano. In trying to to reuse this code, however, some things had to be changed. 
   
   First was the fact that this model didn't actually save any weights, so save_weights() was added, which lets you save the results of training to pass to your friends so they could have some great Rapspeare fun without an expensive GPU.
   
   Second, I reduced the number of total Epochs to 30 from 50, because I was noticing no real improvement after 20 or so Epochs (Like those kids that peak in high school, I saw that Rapspeare pretty much reached its potential under the design architecture that I'd chosen, so I decided to pull the plug there). Not to mention the fact that it was hurting my wallet a little bit under the p2 GPU server I was paying for per GB-hour. 
   
-  I made some other smaller modifications (adding print() messages etc), but unfortunately did not get around to restructuring the whole thing. If you look at Rapspeare, you'll see that many of the functions are contained within a big *main(num_epochs=NUM_EPOCHS)* function. This isn't the best practice as it stops you from calling the functions within *main()* individually to test/ modify, but at the time I was scared of toppling the precarious architecture around which I'd built RNN (It was a serious surprise/miracle to me that it worked at the time, in fact), and so sailing (I felt) between Charybdus and Scylla, I let the dormant beast that was Rapspeare lie, unperturbed (excuse the mongrel metaphors).
+  I made some other smaller modifications (adding print() messages etc), but unfortunately did not get around to restructuring the whole thing. If you look at Rapspeare, you'll see that many of the functions are contained within a big *main(num_epochs=NUM_EPOCHS)* function. This isn't the best practice as it stops you from calling functions from outside the scope of *main()* something you might need to do in the python shell if you wanted to just generate text and not have the whole network retrain at the time.
+  
+  However, I was scared of toppling the precarious architecture around which I'd built RNN (It was a serious surprise/miracle to me that it worked at the time, in fact), and so sailing (I felt) between Charybdus and Scylla, I let the dormant beast that was Rapspeare lie, unperturbed (excuse the mongrel metaphors).
   
 ### Behold!
 *"And Lo, for the Earth was empty of Form, and void. And Darkness was all over the Face of the Deep. And We said: 'Look at that fucker Dance." - David Foster Wallace*
